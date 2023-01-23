@@ -3,22 +3,22 @@
 ## Workflow
 ```mermaid
 graph LR
-A[1. Kaleido] --> B((2. Firefly))
-C{3. Smart Contract} --> B
+A(1. Kaleido) --> B(2. Firefly)
+B --> C(3. Smart Contract) 
 E{tf} --> A
 F{UI} --> A
 G{Kind} --> B
-H{UI} --> B
+H{Helm} --> B
 ```
 ## Approach
 
 > **Prerequisites:** 
-> kind
-> ff cli
-> helm 
-> ct
-> golang
-> kubectl
+> kind, 
+> ff cli, 
+> helm, 
+> ct, 
+> golang, 
+> kubectl, 
 > tf
 
 #### Kaleido Blockchain
@@ -62,52 +62,52 @@ To validate your deployment, you can follow the notes displayed in the output of
 Another way is running `kubectl get all ` to see the status of your pods and services. 
 ```
 $ kubectl get all
-NAME 														READY	STATUS 			RESTARTS  		AGE
-pod/alertmanager-prometheus-kube-prome-alertmanager-0 		2/2		Running 		1 (3d1h ago)  	3d1h
-pod/firefly-0  												0/1   CrashLoopBackOff 	184 (47s ago) 	2d9h
-pod/firefly-dx-0 											1/1 	Running  		0 				34m
-pod/firefly-sandbox-7bd4bb5bc4-rgnj5 						1/1 	Running  		51 (46m ago)  	2d9h
-pod/firefly6-0  											0/1	  CrashLoopBackOff 	237 (69s ago) 	3d1h
-pod/firefly6-sandbox-747666747d-49wwt  						1/1 	Running  		53 (46m ago)  	3d1h
-pod/kube-prometheus-prome-operator-848944b9f8-hk9cc 		1/1 	Running  		0 				3d1h
-pod/postgresql-0 											1/1 	Running  		0 				3d1h
-pod/postgresql-client  										1/1 	Running  		0 				3d1h
-pod/prometheus-kube-prometheus-prome-prometheus-0 			2/2 	Running  		3 (133m ago)  	3d1h
+NAME 								READY	STATUS 			RESTARTS  		AGE
+pod/alertmanager-prometheus-kube-prome-alertmanager-0 		2/2	Running 		1 (3d1h ago) 	 	3d1h
+pod/firefly-0  							0/1 	CrashLoopBackOff 	184 (47s ago) 		2d9h
+pod/firefly-dx-0 						1/1 	Running  		0 			34m
+pod/firefly-sandbox-7bd4bb5bc4-rgnj5 				1/1 	Running  		51 (46m ago)  		2d9h
+pod/firefly6-0  						0/1	CrashLoopBackOff 	237 (69s ago) 		3d1h
+pod/firefly6-sandbox-747666747d-49wwt  				1/1 	Running  		53 (46m ago)  		3d1h
+pod/kube-prometheus-prome-operator-848944b9f8-hk9cc 		1/1 	Running  		0 			3d1h
+pod/postgresql-0 						1/1 	Running  		0 			3d1h
+pod/postgresql-client  						1/1 	Running  		0 			3d1h
+pod/prometheus-kube-prometheus-prome-prometheus-0 		2/2 	Running		  	3 (133m ago)	  	3d1h
 
-NAME  								TYPE  	  CLUSTER-IP    EXTERNAL-IP PORT(S) 					AGE
-service/alertmanager-operated 		ClusterIP None  		<none>  	9093/TCP,9094/TCP,9094/UDP  3d1h
-service/firefly 					ClusterIP 1.2.3.4 		<none>  	6060,5000,5001,5100/TCP 	2d9h
-service/firefly-dx  				ClusterIP 1.2.3.118 	<none>  	5000/TCP,5001/TCP 			2d9h
-service/firefly-sandbox 			ClusterIP 1.2.3.139 	<none>  	3001/TCP  					2d9h
-service/firefly6  					ClusterIP 1.2.3.122 	<none>  	5000/TCP,5001/TCP,5100/TCP  3d1h
-service/firefly6-dx 				ClusterIP 1.2.3.106  	<none>  	5000/TCP,5001/TCP 			3d1h
-service/firefly6-sandbox  			ClusterIP 1.2.3.240  	<none>  	3001/TCP  					3d1h
-service/kube-prome...alertmanager 	ClusterIP 1.2.3.69 		<none>  	9093/TCP  					3d1h
-service/kube-prome...operator 		ClusterIP 1.2.3.228 	<none>  	443/TCP 					3d1h
-service/kube-prome...prometheus 	ClusterIP 1.2.3.13  	<none>  	9090/TCP  					3d1h
-service/kubernetes  				ClusterIP 1.2.3.1 		<none>  	443/TCP		 				3d4h
-service/postgresql  				ClusterIP 1.2.3.130 	<none>  	5432/TCP  					3d1h
-service/postgresql-hl 				ClusterIP None  		<none>  	5432/TCP  					3d1h
-service/prometheus-operated 		ClusterIP None  		<none>  	9090/TCP 					3d1h
+NAME  					TYPE  		CLUSTER-IP   	EXTERNAL-IP 	PORT(S) 			AGE
+service/alertmanager-operated 		ClusterIP 	None  		<none>  	9093/TCP,9094/TCP,9094/UDP 	3d1h
+service/firefly 			ClusterIP 	1.2.3.4 	<none>  	6060,5000,5001,5100/TCP 	2d9h
+service/firefly-dx  			ClusterIP 	1.2.3.118 	<none>  	5000/TCP,5001/TCP 		2d9h
+service/firefly-sandbox 		ClusterIP 	1.2.3.139 	<none>  	3001/TCP  			2d9h
+service/firefly6  			ClusterIP 	1.2.3.122 	<none>  	5000/TCP,5001/TCP,5100/TCP  	3d1h
+service/firefly6-dx 			ClusterIP 	1.2.3.106  	<none>  	5000/TCP,5001/TCP 		3d1h
+service/firefly6-sandbox  		ClusterIP 	1.2.3.240  	<none>  	3001/TCP  			3d1h
+service/kube-prome...alertmanager 	ClusterIP 	1.2.3.69 	<none>  	9093/TCP  			3d1h
+service/kube-prome...operator 		ClusterIP 	1.2.3.228 	<none>  	443/TCP 			3d1h
+service/kube-prome...prometheus 	ClusterIP 	1.2.3.13  	<none>  	9090/TCP  			3d1h
+service/kubernetes  			ClusterIP 	1.2.3.1 	<none>  	443/TCP		 		3d4h
+service/postgresql  			ClusterIP 	1.2.3.130 	<none>  	5432/TCP  			3d1h
+service/postgresql-hl 			ClusterIP 	None  		<none>  	5432/TCP  			3d1h
+service/prometheus-operated 		ClusterIP 	None  		<none>  	9090/TCP 			3d1h
 
-NAME  													READY 	UP-TO-DATE 	AVAILABLE 	AGE
-deployment.apps/firefly-sandbox 						1/1 	1  			1 			2d9h
-deployment.apps/firefly6-sandbox  						1/1 	1  			1 			3d1h
-deployment.apps/kube-prometheus-kube-prome-operator 	1/1 	1  			1 			3d1h
+NAME  							READY 	UP-TO-DATE 	AVAILABLE 	AGE
+deployment.apps/firefly-sandbox 			1/1 	1  		1 		2d9h
+deployment.apps/firefly6-sandbox  			1/1 	1  		1 		3d1h
+deployment.apps/kube-prometheus-kube-prome-operator 	1/1 	1  		1 		3d1h
 
-NAME 															DESIRED CURRENT READY 	AGE
-replicaset.apps/firefly-sandbox-7bd4bb5bc4 						1 		1 		1 		2d9h
-replicaset.apps/firefly6-sandbox-747666747d  					1 		1 		1 		3d1h
+NAME 								DESIRED 	CURRENT	 	READY 		AGE
+replicaset.apps/firefly-sandbox-7bd4bb5bc4 			1 		1 		1 		2d9h
+replicaset.apps/firefly6-sandbox-747666747d  			1 		1 		1 		3d1h
 replicaset.apps/kube-prometheus-kube-prome-operator-848944b9f8 	1 		1 		1 		3d1h
 
-NAME  																	READY 	AGE
-statefulset.apps/alertmanager-kube-prometheus-kube-prome-alertmanager 	1/1 	3d1h
-statefulset.apps/firefly  												0/1 	2d9h
-statefulset.apps/firefly-dx 											1/1 	2d9h
-statefulset.apps/firefly6 												0/1 	3d1h
-statefulset.apps/firefly6-dx  											0/1 	3d1h
-statefulset.apps/postgresql 											1/1 	3d1h
-statefulset.apps/prometheus-kube-prometheus-kube-prome-prometheus 		1/1 	3d1h
+NAME  										READY 		AGE
+statefulset.apps/alertmanager-kube-prometheus-kube-prome-alertmanager 		1/1 		3d1h
+statefulset.apps/firefly  							0/1 		2d9h
+statefulset.apps/firefly-dx 							1/1 		2d9h
+statefulset.apps/firefly6 							0/1 		3d1h
+statefulset.apps/firefly6-dx  							0/1 		3d1h
+statefulset.apps/postgresql 							1/1 		3d1h
+statefulset.apps/prometheus-kube-prometheus-kube-prome-prometheus 		1/1 		3d1h
 ```
 Some troubleshooting commands - 
 `kubectl logs pod/firefly6-0`
