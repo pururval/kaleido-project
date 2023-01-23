@@ -1,0 +1,36 @@
+config:
+  debugEnabled: true
+  adminEnabled: true
+  metricsEnabled: true
+  preInit: true
+
+  organizationName: "Example Organization"
+  organizationKey: "u0e4x4gzc6"
+  fireflyContractAddress: "0x207be9351c66120aad18c223aef42cb2e4615b2d"
+
+  ethconnectUrl: "https://u0gkh0op1y-u0r88stp8e-connect.us0-aws.kaleido.io/" 
+  ethconnectUsername: "u0cg4r1il4"
+  ethconnectPassword: "T-hXoUMopf1wSYtw2Rw2NSR78DAw7z15d-ZbJjniNEs"
+
+  postgresUrl: "postgres://postgres:BeFwnSwTcJ@postgresql.default.svc:5432?sslmode=disable"
+  postgresAutomigrate: true
+
+  ipfsApiUrl: "https://u0gkh0op1y-u0hesmu62x-ipfs.us0-aws.kaleido.io/"
+  ipfsGatewayUrl: "https://u0gkh0op1y-u0hesmu62x-ipfs.us0-aws.kaleido.io/"
+
+  addresssResolverUrlTemplate: "http://address-resolver.firefly-os/wallets/{{.Key}}"
+
+core:
+  metrics:
+    serviceMonitor:
+      enabled: true
+
+dataexchange:
+  certificate:
+    enabled: true
+    issuerRef:
+      kind: ClusterIssuer
+      name: selfsigned-ca
+
+  tlsSecret:
+    enabled: false
